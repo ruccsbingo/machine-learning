@@ -20,23 +20,8 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
-alpha = 0.005;
-i = 0;
-theta0 = theta(1);
-theta1 = theta(2);
-theta2 = theta(3);
-
-while (i < 1000000) 
-	theta0 = theta0 - alpha * 1 / m * ((transpose(sigmoid(X * theta) - y)) * X(:, 1));
-	theta1 = theta1 - alpha * 1 / m * ((transpose(sigmoid(X * theta) - y)) * X(:, 2));
-	theta2 = theta2 - alpha * 1 / m * ((transpose(sigmoid(X * theta) - y)) * X(:, 3)); 
-
-	theta = [theta0; theta1; theta2];
-	i = i + 1;
-endwhile
-
-grad = theta
-J = (1 / m) * (sum(-y .* log(sigmoid(X * theta)) - (1 - y) .* log(1 - sigmoid(X * theta))))
+J = (1 / m) * (sum(-y .* log(sigmoid(X * theta)) - (1 - y) .* log(1 - sigmoid(X * theta))));
+grad = (transpose(X) * (sigmoid(X * theta) - y)) / m;
 
 % =============================================================
 
